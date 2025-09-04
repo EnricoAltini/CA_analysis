@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Autoregolazione Cerebrale - UP TO DATE on NEUROSONOLOGY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3b6ea8 100%);
+            color: #333;
+            overflow: hidden;
+        }
+        
+        .presentation-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .slide {
+            flex: 1;
+            padding: 40px;
+            display: none;
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+        }
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 0.6s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide h1 {
+            color: #1e3c72;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .slide h2 {
+            color: #2a5298;
+            font-size: 2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #3b6ea8;
+            padding-bottom: 10px;
+        }
+        
+        .slide h3 {
+            color: #1e3c72;
+            font-size: 1.4em;
+            margin: 20px 0 15px 0;
+        }
+        
+        /* Slide specifica - Titolo */
+        .title-slide {
+            text-align: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .title-slide h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .event-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            backdrop-filter: blur(5px);
+        }
+        
+        .event-info h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .author-info {
+            margin-top: 40px;
+            font-size: 1.1em;
+        }
+        
+        /* Layout a due colonne */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            height: 100%;
+        }
+        
+        .column {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .challenges-list {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .challenges-list h3 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .challenges-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .challenges-list li {
+            margin: 15px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .challenges-list li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .solution-box {
+            background: linear-gradient(135deg, #56ab2f, #a8e6cf);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+        }
+        
+        .solution-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        /* Diagramma di flusso */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .flow-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 150px;
+            position: relative;
+        }
+        
+        .flow-arrow {
+            font-size: 2em;
+            color: #3b6ea8;
+        }
+        
+        /* Metodologia boxes */
+        .methodology-box {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .methodology-box h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .methodology-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .methodology-box li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .methodology-box li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-weight: bold;
+        }
+        
+        /* Grafici placeholder
+        .chart-placeholder {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 200px;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            margin: 20px 0;
+        } */
+
+        
+
+        .chart-placeholder {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            font-size: 1.2em;
+            margin: 20px 0;
+            display: block;
+            text-align: center;
+            
+            /* overflow: hidden;    se l’immagine è più grande, non esce */
+        }
+
+        .chart-placeholder img {
+            display: block;
+            max-width: 100%;   
+            max-height: 100%;   
+            width: auto;
+            height: auto;
+            margin: 15px auto 0; 
+        }
+    
+
+        /* Caratteristiche principali */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h4 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer controlli */
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+        
+        .control-btn {
+            background: rgba(30, 60, 114, 0.9);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .control-btn:hover {
+            background: rgba(30, 60, 114, 1);
+            transform: scale(1.05);
+        }
+        
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 60, 114, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Stili specifici per tabelle */
+        .results-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        
+        .results-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .results-table th {
+            background: #1e3c72;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .results-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .results-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        /* Evidenziazione conformità */
+        .compliance-badge {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        
+        .guidelines-ref {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .slide h1 {
+                font-size: 2em;
+            }
+            
+            .slide h2 {
+                font-size: 1.5em;
+            }
+            
+            .flow-diagram {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">9</span>
+        </div>
+        
+        <!-- Slide 1: Titolo -->
+        <div class="slide active title-slide">
+            <h1>Analisi Automatizzata e Conforme alle Linee Guida dell'Autoregolazione Cerebrale</h1>
+            <p class="subtitle">Un software basato su Python per l'integrazione dei dati da Finapres NOVA e TCD Dolphin</p>
+            
+            <div class="event-info">
+                <h3>UP TO DATE on NEUROSONOLOGY</h3>
+                <p><strong>L'EVOLUZIONE DEGLI ULTRASUONI: DALLA DIAGNOSI ALLA TERAPIA</strong></p>
+                <p>10-11 Settembre 2025</p>
+            </div>
+            
+            <div class="author-info">
+                <p><strong>Relatore:</strong> Ing. Enrico Altini</p>
+                <p><strong>Istituzione:</strong> Sparkbio Srl</p>
+            </div>
+        </div>
+        
+        <!-- Slide 2: La Sfida Clinica -->
+        <div class="slide">
+            <h2>La Sfida Clinica e la Nostra Soluzione</h2>
+            <div class="two-column">
+                <div class="column">
+                    <div class="challenges-list">
+                        <h3>🔴 Sfide Attuali</h3>
+                        <ul>
+                            <li>La valutazione dell'autoregolazione cerebrale è cruciale ma complessa</li>
+                            <li>L'analisi manuale richiede tempo ed è soggetta a variabilità</li>
+                            <li>Richiede stretta aderenza a standard metodologici complessi</li>
+                            <li>Difficoltà nella standardizzazione tra centri diversi</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="solution-box">
+                        <h3>💡 Nostra Soluzione</h3>
+                        <p>Un'applicazione basata su Python che automatizza l'intero flusso di lavoro, dai dati grezzi al report finale, garantendo la <strong>conformità alle linee guida internazionali</strong>.</p>
+                        <div class="chart-placeholder" >
+                            <p>📊 Screenshot Interfaccia Software</p>
+                            <img src="images/load_traces_.JPG" width="561" height="300">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Setup Sistema -->
+        <div class="slide">
+            <h2>Acquisizione Dati e Setup del Sistema</h2>
+            <div class="flow-diagram">
+                <div class="flow-item">
+                    <strong>🔊 TCD Dolphin</strong><br>
+                    Misura CBFV<br>
+                    (Velocità Flusso Cerebrale)
+                </div>
+                <div class="flow-arrow">➡️</div>
+                <div class="flow-item">
+                    <strong>📡 Cavo Analogico</strong><br>
+                    Sincronizzazione<br>
+                    Segnali
+                </div>
+                <div class="flow-arrow">➡️</div>
+                <div class="flow-item">
+                    <strong>📈 Finapres NOVA</strong><br>
+                    Misura ABP +<br>
+                    Registra CBFV
+                </div>
+                <div class="flow-arrow">➡️</div>
+                <div class="flow-item">
+                    <strong>🐍 Software Python</strong><br>
+                    Analisi Automatizzata<br>
+                    TFA Conforme
+                </div>
+            </div>
+            
+            <div class="methodology-box">
+                <h4>🔧 Vantaggi del Setup Integrato</h4>
+                <ul>
+                    <li>Perfetta sincronizzazione temporale dei segnali</li>
+                    <li>Eliminazione di artefatti da disallineamento</li>
+                    <li>Facilità di acquisizione in ambiente clinico</li>
+                    <li>Compatibilità con protocolli standard</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 4: Pre-processing -->
+        <div class="slide">
+            <h2>Fase 1 - Pre-processing e Rimozione Artefatti</h2>
+            <div class="two-column">
+                <div class="column">
+                    <div class="chart-placeholder">
+                        <p>📊 Raw Signals Tracciato con rumore e artefatti</p>
+                        <img src="images/initial selection_.JPG" width="561" height="300">
+                    </div>
+                    <div class="chart-placeholder">
+                        <p>📊 Select Part Segmento pulito selezionato</p>
+                        <img src="images/detection_constant_.jpg" width="561" height="300">
+                    </div>
+                </div>
+                <div class="column">
+                    <h3>🔍 Punti Chiave del Pre-processing</h3>
+                    <div class="methodology-box">
+                        <h4>Selezione Tracciato</h4>
+                        <ul>
+                            <li>Ispezione visuale interattiva</li>
+                            <li>Selezione segmento più stabile</li>
+                            <li>Rimozione periodi con artefatti</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="methodology-box" style="background: linear-gradient(135deg, #ff6b6b, #ffa500);">
+                        <h4>Rimozione "Physiocal"</h4>
+                        <ul>
+                            <li>Algoritmo automatico detect_constant_amplitude_regions</li>
+                            <li>Identificazione regioni piatte da calibrazione NOVA</li>
+                            <li>Soglia configurabile dall'utente</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="methodology-box" style="background: linear-gradient(135deg, #56ab2f, #a8e6cf);">
+                        <h4>Filtraggio Digitale</h4>
+                        <ul>
+                            <li>Filtro passa-basso Butterworth</li>
+                            <li>Preservazione morfologia forma d'onda</li>
+                            <li>Preparazione per peak detection affidabile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Feature Extraction -->
+        <div class="slide">
+            <h2>Fase 2 - Estrazione Features e Ricampionamento</h2>
+            <div class="chart-placeholder">
+                 <p>📊 Grafico con Picchi Sistolici e Diastolici Evidenziati ABP e CBFV con peak detection</p>
+                 <img src="images/peak_detection_.JPG" width="1309" height="700"> 
+                
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>🎯 Peak Detection</h4>
+                    <p>Utilizzo di <code>find_peaks</code> di SciPy con parametri configurabili: altezza, prominenza e distanza</p>
+                </div>
+                
+                <div class="feature-card" style="background: linear-gradient(135deg, #a8e6cf, #56ab2f);">
+                    <h4>📊 Calcolo Valori Medi</h4>
+                    <p>Medio = Diastole + (Systole - Diastole)/3<br>Serie temporali battito-battito</p>
+                </div>
+                
+                <div class="feature-card" style="background: linear-gradient(135deg, #ffd89b, #19547b);">
+                    <h4>🔄 Ricampionamento</h4>
+                    <p>Interpolazione e ricampionamento a 4 Hz per analisi nel dominio della frequenza</p>
+                </div>
+            </div>
+            
+            <div class="compliance-badge">
+                ✅ Conforme alle raccomandazioni CARNet per processing dei segnali
+            </div>
+        </div>
+        
+        <!-- Slide 6: TFA -->
+        <div class="slide">
+            <h2>Fase 3 - Analisi della Funzione di Trasferimento (TFA)</h2>
+            <div class="compliance-badge">
+                ✅ Implementazione rigorosamente conforme alle linee guida CARNet 2022
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="chart-placeholder">
+                        <p>📊 Grafico Coherence</p>
+                        <img src="images/TFA.JPG" width="748" height="400">
+                    </div>
+                    
+                </div>
+                
+                <div class="column">
+                    <div class="methodology-box">
+                        <h4>⚙️ Metodologia TFA</h4>
+                        <ul>
+                            <li><strong>Metodo:</strong> Periodogramma di Welch</li>
+                            <li><strong>Lunghezza Finestra:</strong> 102.4 secondi</li>
+                            <li><strong>Sovrapposizione:</strong> 59.99%</li>
+                            <li><strong>Bande:</strong> VLF (0.02-0.07), LF (0.07-0.2), HF (0.2-0.5 Hz)</li>
+                            <li><strong>Soglia Coerenza:</strong> 95% livello confidenza</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="guidelines-ref">
+                        <strong>📚 Riferimento Scientifico:</strong><br>
+                        <em>Transfer function analysis of dynamic cerebral autoregulation: A CARNet white paper 2022 update</em><br>
+                        <small>PMC 9875346 - Raccomandazioni standardizzate per metodologia TFA</small>
+                    </div>
+                    
+                    <h3>📈 Parametri TFA Calcolati:</h3>
+                    <ul style="margin-top: 15px;">
+                        <li><strong>Coerenza:</strong> Relazione lineare ABP-CBFV</li>
+                        <li><strong>Gain:</strong> Effetto smorzamento autoregolazione</li>
+                        <li><strong>Phase:</strong> Ritardo temporale risposta flusso</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 7: BPV e Mx -->
+        <div class="slide">
+            <h2>Fase 4 - BPV e Indici di Correlazione (Mx)</h2>
+            <div class="compliance-badge">
+                ✅ Conforme alle linee guida per indici di correlazione (Czosnyka et al. 2003)
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="results-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Parametro BPV</th>
+                                    <th>Descrizione</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Media</td><td>Valore medio pressorio</td></tr>
+                                <tr><td>SD</td><td>Deviazione standard</td></tr>
+                                <tr><td>CV</td><td>Coefficiente variazione</td></tr>
+                                <tr><td>ARV</td><td>Variabilità reale media</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="methodology-box">
+                        <h4>🧮 Calcolo Indice Mx</h4>
+                        <ul>
+                            <li>Dati mediati in intervalli di 3 secondi</li>
+                            <li>Coefficiente correlazione Pearson</li>
+                            <li>Finestre sovrapposte di 1 minuto</li>
+                            <li>Mx = media di tutti i coefficienti</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="guidelines-ref">
+                        <strong>📚 Metodologia Validata:</strong><br>
+                        Basata su Czosnyka et al. (2003) - Standard metodologico per indici di correlazione nell'autoregolazione cerebrale
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h4>📊 Interpretazione Mx</h4>
+                        <p><strong>Mx più alto</strong> = Autoregolazione compromessa<br>
+                        <strong>Mx più basso</strong> = Autoregolazione efficiente</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 8: Conclusioni -->
+        <div class="slide">
+            <h2>Conclusioni e Sviluppi Futuri</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>🤖 Automatizzato e Integrato</h4>
+                    <p>Ottimizza l'intero flusso di lavoro dell'analisi dall'acquisizione al report finale</p>
+                </div>
+                
+                <div class="feature-card" style="background: linear-gradient(135deg, #56ab2f, #a8e6cf);">
+                    <h4>✅ Conforme alle Linee Guida</h4>
+                    <p>Aderisce agli standard CARNet consolidati per TFA e indici di correlazione</p>
+                </div>
+                
+                <div class="feature-card" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <h4>📊 Quantitativo e Riproducibile</h4>
+                    <p>Fornisce metriche oggettive a supporto del processo decisionale clinico</p>
+                </div>
+            </div>
+            
+            <div class="methodology-box">
+                <h4>🚀 Sviluppi Futuri</h4>
+                <ul>
+                    <li>Integrazione con altri sistemi TCD commerciali</li>
+                    <li>Implementazione parametri neurosonologici aggiuntivi</li>
+                    <li>Validazione su dataset clinico multicentrico</li>
+                    <li>Interfaccia web per accesso remoto</li>
+                    <li>Moduli per analisi in tempo reale</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px; font-size: 1.3em; color: #1e3c72;">
+                <strong>"L'Evoluzione degli Ultrasuoni: dalla diagnosi alla comprensione fisiologica avanzata"</strong>
+            </div>
+        </div>
+        
+        <!-- Slide 9: Q&A -->
+        <div class="slide title-slide">
+            <h1>Grazie per l'Attenzione</h1>
+            <div class="subtitle">
+                <strong>Domande e Discussione</strong>
+            </div>
+            
+            <div class="event-info">
+                <h3>📧 Contatti</h3>
+                <p><strong>Email:</strong> [la.tua.email@istituzione.it]</p>
+                <p><strong>LinkedIn:</strong> [Il tuo profilo LinkedIn]</p>
+                <p><strong>ResearchGate:</strong> [Il tuo profilo ResearchGate]</p>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <p style="font-size: 1.1em; opacity: 0.9;">
+                    🧠 <strong>Autoregolazione Cerebrale:</strong> Dalla metodologia alla pratica clinica<br>
+                    🔬 <strong>Open Science:</strong> Codice e dati disponibili per la comunità scientifica
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="controls">
+        <button class="control-btn" onclick="prevSlide()">⬅️ Precedente</button>
+        <button class="control-btn" onclick="nextSlide()">Successiva ➡️</button>
+    </div>
+    
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+        
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            document.getElementById('currentSlide').textContent = index + 1;
+            currentSlideIndex = index;
+        }
+        
+        function nextSlide() {
+            if (currentSlideIndex < totalSlides - 1) {
+                showSlide(currentSlideIndex + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                showSlide(currentSlideIndex - 1);
+            }
+        }
+        
+        // Controlli da tastiera
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'Home') {
+                showSlide(0);
+            } else if (e.key === 'End') {
+                showSlide(totalSlides - 1);
+            }
+        });
+        
+        // Inizializzazione
+        showSlide(0);
+        
+        // Timer automatico per presentazione (opzionale - commentato)
+        /*
+        let autoSlideTimer;
+        
+        function startAutoSlide() {
+            autoSlideTimer = setInterval(() => {
+                if (currentSlideIndex < totalSlides - 1) {
+                    nextSlide();
+                } else {
+                    clearInterval(autoSlideTimer);
+                }
+            }, 30000); // 30 secondi per slide
+        }
+        
+        function stopAutoSlide() {
+            clearInterval(autoSlideTimer);
+        }
+        
+        // Uncomment to enable auto-slide
+        // startAutoSlide();
+        */
+    </script>
+</body>
+</html>
